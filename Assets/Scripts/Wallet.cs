@@ -4,16 +4,35 @@ public class Wallet : MonoBehaviour
 {
     public int coins, gems;
 
-    public void Spend(int currency, int amount)
+    public bool SpendCoins(int amount)
     {
-        if (currency - amount > 0)
+        if (coins - amount > 0)
         {
-            currency -= amount;
+            coins -= amount;
+            return true;
         }
+
+        return false;
     }
 
-    public void Earn(int currency, int amount)
+    public bool SpendGems(int amount)
     {
-        currency += amount;
+        if (gems - amount > 0)
+        {
+            gems -= amount;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void EarnCoins(int amount)
+    {
+        coins += amount;
+    }
+
+    public void EarnGems(int amount)
+    {
+        gems += amount;
     }
 }

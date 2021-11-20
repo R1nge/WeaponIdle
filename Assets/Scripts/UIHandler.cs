@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +20,7 @@ public class UIHandler : MonoBehaviour
     private void Start()
     {
         UpdateUI();
+        Timer.TimeEndEvent += UpdateUI;
     }
 
     public void ShowUpgradeMenu(Weapon weapon)
@@ -30,9 +32,13 @@ public class UIHandler : MonoBehaviour
 
     public void UpgradeWeapon()
     {
-        _weapon.weaponLevel += 1;
-        _weapon.weaponIncome = 2 * _weapon.weaponLevel;
-        UpdateUpgradeUI();
+        if (_wallet.SpendCoins(_weapon.weaponLevel * 10))
+        {
+            _weapon.weaponLevel += 1;
+            _weapon.weaponIncome = 2 * _weapon.weaponLevel;
+            UpdateUpgradeUI();
+            UpdateUI();
+        }
     }
 
     public void HideUpgradeMenu()

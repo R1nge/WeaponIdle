@@ -1945,8 +1945,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b893b96479a23c439aae46099d10134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coins: 10
-  gems: 5
+  coins: 0
+  gems: 0
 --- !u!114 &483032441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1978,7 +1978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f929b4cc46724874ab5c2fa745e12607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 5
+  startTime: 1
 --- !u!4 &483032443
 Transform:
   m_ObjectHideFlags: 0
@@ -3626,7 +3626,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1132517692}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 483032442}
+        m_TargetAssemblyTypeName: Timer, Assembly-CSharp
+        m_MethodName: ApplyBoost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1132517692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4239,7 +4251,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 263857619}
   m_Direction: 2
   m_Value: -0.00000009960407
-  m_Size: 0.40359944
+  m_Size: 0.31260616
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

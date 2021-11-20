@@ -5,20 +5,40 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] private float startTime;
     private float _time;
-    public Action TimeEndEvent;
+    private bool _boost;
+    private float _boostTime;
+    public static Action TimeEndEvent;
 
     private void Start()
     {
         _time = startTime;
+        _boostTime = 300f;
     }
 
     private void Update()
     {
-        _time -= Time.deltaTime;
-        if (_time <= 0)
+        if (_boost)
         {
-            TimeEndEvent?.Invoke();
-            _time = startTime;
+            _time -= Time.deltaTime * 2;
+            _boostTime -= Time.deltaTime;
+        }
+        else
+        {
+            _time -= Time.deltaTime;
+        }
+
+        if (!(_time <= 0)) return;
+        TimeEndEvent?.Invoke();
+        print("Timer");
+        _time = startTime;
+    }
+
+    public void ApplyBoost()
+    {
+        _boost = true;
+        if (_boostTime <= 0)
+        {
+            _boost = false;
         }
     }
 }
