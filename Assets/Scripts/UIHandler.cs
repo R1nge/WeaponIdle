@@ -32,10 +32,9 @@ public class UIHandler : MonoBehaviour
 
     public void UpgradeWeapon()
     {
-        if (_wallet.SpendCoins(_weapon.weaponLevel * 10))
+        if (_wallet.SpendCoins(_weapon.weaponSo.weaponLevel * 10))
         {
-            _weapon.weaponLevel += 1;
-            _weapon.weaponIncome = 2 * _weapon.weaponLevel;
+            _weapon.UpgradeWeapon();
             UpdateUpgradeUI();
             UpdateUI();
         }
@@ -54,9 +53,9 @@ public class UIHandler : MonoBehaviour
 
     private void UpdateUpgradeUI()
     {
-        weaponName.text = _weapon.weaponName;
-        weaponLevel.text = "Level: " + _weapon.weaponLevel;
-        weaponIncome.text = "Income:" + _weapon.weaponIncome;
-        weaponImage.sprite = _weapon.sprite;
+        weaponName.text = _weapon.weaponSo.weaponName;
+        weaponLevel.text = "Level: " + _weapon.weaponSo.weaponLevel;
+        weaponIncome.text = "Income:" + _weapon.weaponSo.weaponIncome;
+        weaponImage.sprite = _weapon.weaponSo.sprite;
     }
 }

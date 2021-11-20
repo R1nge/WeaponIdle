@@ -35,7 +35,11 @@ public class Timer : MonoBehaviour
 
     public void ApplyBoost()
     {
-        _boost = true;
+        if (!_boost)
+        {
+            _boost = true;
+        }
+
         if (_boostTime <= 0)
         {
             _boost = false;
