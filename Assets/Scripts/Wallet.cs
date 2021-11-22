@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Wallet : MonoBehaviour
 {
-    public int coins, gems;
+    public float coins, gems;
     private UIHandler _uiHandler;
 
     private void Awake()
@@ -11,7 +11,7 @@ public class Wallet : MonoBehaviour
         LoadGame();
     }
 
-    public bool SpendCoins(int amount)
+    public bool SpendCoins(float amount)
     {
         if (coins - amount > 0)
         {
@@ -23,40 +23,21 @@ public class Wallet : MonoBehaviour
         return false;
     }
 
-    public bool SpendGems(int amount)
-    {
-        if (gems - amount > 0)
-        {
-            gems -= amount;
-            _uiHandler.UpdateUI();
-            return true;
-        }
-
-        return false;
-    }
-
-    public void EarnCoins(int amount)
+    public void EarnCoins(float amount)
     {
         coins += amount;
         _uiHandler.UpdateUI();
         SaveGame();
     }
 
-    public void EarnGems(int amount)
-    {
-        gems += amount;
-        _uiHandler.UpdateUI();
-    }
 
     private void SaveGame()
     {
-        PlayerPrefs.SetInt("Coins", coins);
-        PlayerPrefs.SetInt("Gems", gems);
+        PlayerPrefs.SetFloat("Coins", coins);
     }
 
     private void LoadGame()
     {
-        coins = PlayerPrefs.GetInt("Coins", coins);
-        gems = PlayerPrefs.GetInt("Gems", gems);
+        coins = PlayerPrefs.GetFloat("Coins", coins);
     }
 }

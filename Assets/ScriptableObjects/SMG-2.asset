@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69a58c14c4236574c83bd7f0a80f38cf, type: 3}
-  m_Name: USP-S
+  m_Name: SMG-2
   m_EditorClassIdentifier: 
-  weaponName: USP-S
-  weaponLevel: 6
-  weaponPrice: 300
-  weaponBaseIncome: 15
-  weaponIncome: 90
-  sprite: {fileID: 21300000, guid: 8e2e681aa0fe903458951b4c53d1920c, type: 3}
-  isUnlocked: 1
+  weaponName: SMG-2
+  weaponLevel: 1
+  weaponPrice: 1200
+  weaponBaseIncome: 60
+  weaponIncome: 60
+  sprite: {fileID: 21300000, guid: b456d29b82760994da6cfbb991daec9a, type: 3}
+  isUnlocked: 0
   isAuto: 0

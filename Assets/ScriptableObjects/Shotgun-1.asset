@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69a58c14c4236574c83bd7f0a80f38cf, type: 3}
-  m_Name: USP-S
+  m_Name: Shotgun-1
   m_EditorClassIdentifier: 
-  weaponName: USP-S
-  weaponLevel: 6
-  weaponPrice: 300
-  weaponBaseIncome: 15
-  weaponIncome: 90
-  sprite: {fileID: 21300000, guid: 8e2e681aa0fe903458951b4c53d1920c, type: 3}
-  isUnlocked: 1
+  weaponName: Shotgun-1
+  weaponLevel: 1
+  weaponPrice: 2400
+  weaponBaseIncome: 120
+  weaponIncome: 100
+  sprite: {fileID: 21300000, guid: ae802913b917ccd48b6056d07f99940e, type: 3}
+  isUnlocked: 0
   isAuto: 0
