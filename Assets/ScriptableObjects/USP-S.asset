@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: USP-S
   m_EditorClassIdentifier: 
   weaponName: USP-S
-  weaponLevel: 6
-  weaponPrice: 300
+  weaponLevel: 1
+  weaponPrice: 350
   weaponBaseIncome: 15
-  weaponIncome: 90
+  weaponIncome: 105
   sprite: {fileID: 21300000, guid: 8e2e681aa0fe903458951b4c53d1920c, type: 3}
   isUnlocked: 1
   isAuto: 0

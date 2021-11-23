@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: SMG-2
   weaponLevel: 1
-  weaponPrice: 1200
+  weaponPrice: 162.5
   weaponBaseIncome: 60
   weaponIncome: 60
   sprite: {fileID: 21300000, guid: b456d29b82760994da6cfbb991daec9a, type: 3}
