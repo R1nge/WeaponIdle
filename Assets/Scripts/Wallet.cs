@@ -26,7 +26,6 @@ public class Wallet : MonoBehaviour
     {
         coins += amount;
         OnCoinsAmountChanged?.Invoke(coins);
-        Save();
     }
 
     public bool SpendCoins(float amount)
@@ -34,7 +33,6 @@ public class Wallet : MonoBehaviour
         if (!(coins - amount > 0)) return false;
         coins -= amount;
         OnCoinsAmountChanged?.Invoke(coins);
-        Save();
         return true;
     }
 
@@ -42,7 +40,6 @@ public class Wallet : MonoBehaviour
     {
         coins += amount;
         OnGemsAmountChanged?.Invoke(gems);
-        Save();
     }
     
     public bool SpendGems(float amount)
