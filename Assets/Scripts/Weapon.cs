@@ -6,12 +6,14 @@ public class Weapon : MonoBehaviour, IPointerClickHandler
 {
     public WeaponSO weaponSo;
     public static bool boost;
-    public float time;
-    [SerializeField] private float startTime;
+    [HideInInspector] public float time;
+    private float _startTime;
     private Wallet _wallet;
     private bool _startedTimer;
 
     private void Awake() => _wallet = FindObjectOfType<Wallet>();
+
+    private void Start() => _startTime = weaponSo.startTime;
 
     private void Update()
     {
@@ -24,7 +26,7 @@ public class Weapon : MonoBehaviour, IPointerClickHandler
         
         if (time <= 0)
         {
-            time = startTime;
+            time = _startTime;
         }
         else
         {
@@ -57,7 +59,7 @@ public class Weapon : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            time = startTime;
+            time = _startTime;
             yield return new WaitForSeconds(time);
         }
         

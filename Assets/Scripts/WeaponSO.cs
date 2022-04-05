@@ -8,6 +8,7 @@ public class WeaponSO : ScriptableObject
     public float weaponPrice;
     public float weaponBaseIncome;
     public float weaponIncome;
+    public float startTime;
     public Sprite sprite;
     public bool isUnlocked;
     public bool isAuto;
