@@ -608,10 +608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081d57096470f00448f15075f38a1c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 2
   weaponSo: {fileID: 11400000, guid: 71ad64a793d3bdc4a9bb61e44d970f25, type: 2}
-  boost: 0
-  startTime: 1
+  time: 2
 --- !u!114 &5019485527237982993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,8 +626,7 @@ MonoBehaviour:
   weaponLevel: {fileID: 5019485528372187695}
   weaponIncome: {fileID: 5019485528837111614}
   weaponImage: {fileID: 5019485527237982999}
-  weapon: {fileID: 5019485527237982998}
-  progress: {fileID: 5019485526986548429}
+  progressBar: {fileID: 5019485526986548429}
   upgradePrice: {fileID: 5019485527528361163}
   lockScreen: {fileID: 579496192497530094}
   lockScreenIcon: {fileID: 4468063348036963233}

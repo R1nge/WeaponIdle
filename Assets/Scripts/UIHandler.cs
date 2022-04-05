@@ -1,3 +1,4 @@
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 
@@ -8,17 +9,21 @@ public class UIHandler : MonoBehaviour
 
     private void Awake()
     {
+        Weapon.boost = false;
         _wallet = FindObjectOfType<Wallet>();
+        _wallet.OnCoinsAmountChanged += UpdateCoinsText;
+        _wallet.OnGemsAmountChanged += UpdateGemsText;
     }
+    
+    public void ApplyBoost() => Weapon.boost = true;
 
-    private void Start()
-    {
-        UpdateUI();
-    }
+    private void UpdateCoinsText(float amount) => coins.text = "Coins: " + amount.ToString(CultureInfo.InvariantCulture);
 
-    public void UpdateUI()
+    private void UpdateGemsText(float amount) => gems.text = "Gems: " + amount.ToString(CultureInfo.InvariantCulture);
+
+    private void OnDestroy()
     {
-        coins.text = "Coins: " + _wallet.coins;
-        gems.text = "Gems: " + _wallet.gems;
+        _wallet.OnCoinsAmountChanged -= UpdateCoinsText;
+        _wallet.OnGemsAmountChanged -= UpdateGemsText;
     }
 }

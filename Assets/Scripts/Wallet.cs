@@ -1,43 +1,68 @@
+using System;
 using UnityEngine;
 
 public class Wallet : MonoBehaviour
 {
-    public float coins, gems;
-    private UIHandler _uiHandler;
+    [SerializeField] private float coins, gems;
+    private const string Coins = "Coins";
+    private const string Gems = "Gems";
+    public event Action<float> OnCoinsAmountChanged;
+    public event Action<float> OnGemsAmountChanged;
 
     private void Awake()
     {
-        _uiHandler = FindObjectOfType<UIHandler>();
-        LoadGame();
+        Load();
+        OnCoinsAmountChanged += delegate { Save(); };
+        OnGemsAmountChanged += delegate { Save(); };
     }
 
-    public bool SpendCoins(float amount)
+    private void Start()
     {
-        if (coins - amount > 0)
-        {
-            coins -= amount;
-            _uiHandler.UpdateUI();
-            return true;
-        }
-
-        return false;
+        OnCoinsAmountChanged?.Invoke(coins);
+        OnGemsAmountChanged?.Invoke(gems);
     }
 
     public void EarnCoins(float amount)
     {
         coins += amount;
-        _uiHandler.UpdateUI();
-        SaveGame();
+        OnCoinsAmountChanged?.Invoke(coins);
+        Save();
     }
 
-
-    private void SaveGame()
+    public bool SpendCoins(float amount)
     {
-        PlayerPrefs.SetFloat("Coins", coins);
+        if (!(coins - amount > 0)) return false;
+        coins -= amount;
+        OnCoinsAmountChanged?.Invoke(coins);
+        Save();
+        return true;
     }
 
-    private void LoadGame()
+    public void EarnGems(float amount)
     {
-        coins = PlayerPrefs.GetFloat("Coins", coins);
+        coins += amount;
+        OnGemsAmountChanged?.Invoke(gems);
+        Save();
+    }
+    
+    public bool SpendGems(float amount)
+    {
+        if (!(coins - amount > 0)) return false;
+        coins -= amount;
+        OnGemsAmountChanged?.Invoke(gems);
+        return true;
+    }
+    
+    private void Save()
+    {
+        PlayerPrefs.SetFloat(Coins, coins);
+        PlayerPrefs.SetFloat(Gems,gems);
+        PlayerPrefs.Save();
+    }
+
+    private void Load()
+    {
+        coins = PlayerPrefs.GetFloat(Coins, coins);
+        gems = PlayerPrefs.GetFloat(Gems, gems);
     }
 }

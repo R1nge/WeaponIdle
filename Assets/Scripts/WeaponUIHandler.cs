@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -8,77 +7,65 @@ public class WeaponUIHandler : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI weaponName, weaponLevel, weaponIncome;
     [SerializeField] private Image weaponImage;
-    [SerializeField] private Weapon weapon;
-    [SerializeField] private Slider progress;
+    [SerializeField] private Slider progressBar;
     [SerializeField] private TextMeshProUGUI upgradePrice;
     [SerializeField] private GameObject lockScreen;
     [SerializeField] private Image lockScreenIcon;
     [SerializeField] private TextMeshProUGUI buy;
     private Wallet _wallet;
-    private Weapon[] _weapons;
-
-
+    private Weapon _weapon;
+    
     private void Awake()
     {
         _wallet = FindObjectOfType<Wallet>();
-        _weapons = FindObjectsOfType<Weapon>();
+        _weapon = GetComponent<Weapon>();
     }
 
     private void Start()
     {
+        Init();
         UpdateWeaponUI();
-        if (!weapon.weaponSo.isUnlocked)
-        {
-            buy.text = weapon.weaponSo.weaponPrice.ToString(CultureInfo.InvariantCulture);
-            lockScreenIcon.sprite = weapon.weaponSo.sprite;
-        }
-        else
+    }
+
+    private void Update() => UpdateProgressBar();
+
+    private void Init()
+    {
+        if (_weapon.weaponSo.isUnlocked)
         {
             lockScreen.SetActive(false);
         }
+        else
+        {
+            buy.text = _weapon.weaponSo.weaponPrice.ToString(CultureInfo.InvariantCulture);
+            lockScreenIcon.sprite = _weapon.weaponSo.sprite;
+        }
+
+        progressBar.minValue = -_weapon.time;
     }
 
-    private void Update()
-    {
-        progress.value = -weapon.time;
-    }
+    private void UpdateProgressBar() => progressBar.value = -_weapon.time;
 
     public void UpgradeWeapon()
     {
-        if (_wallet.SpendCoins(weapon.weaponSo.weaponPrice))
-        {
-            weapon.UpgradeWeapon();
-            UpdateWeaponUI();
-        }
+        if (!_wallet.SpendCoins(_weapon.weaponSo.weaponPrice)) return;
+        _weapon.weaponSo.UpgradeWeapon();
+        UpdateWeaponUI();
     }
 
     private void UpdateWeaponUI()
     {
-        weaponName.text = weapon.weaponSo.weaponName;
-        weaponLevel.text = "Level: " + weapon.weaponSo.weaponLevel;
-        weaponIncome.text = "Income:" + weapon.weaponSo.weaponIncome;
-        weaponImage.sprite = weapon.weaponSo.sprite;
-        upgradePrice.text = weapon.weaponSo.weaponPrice.ToString(CultureInfo.CurrentCulture);
-    }
-
-    public void ApplyBoost()
-    {
-        foreach (var weapon in _weapons)
-        {
-            if (!weapon.boost)
-            {
-                weapon.boost = true;
-                //Show AD
-            }
-        }
+        weaponName.text = _weapon.weaponSo.weaponName;
+        weaponLevel.text = "Level: " + _weapon.weaponSo.weaponLevel;
+        weaponIncome.text = "Income:" + _weapon.weaponSo.weaponIncome;
+        weaponImage.sprite = _weapon.weaponSo.sprite;
+        upgradePrice.text = _weapon.weaponSo.weaponPrice.ToString(CultureInfo.CurrentCulture);
     }
 
     public void UnlockWeapon()
     {
-        if (_wallet.SpendCoins(weapon.weaponSo.weaponPrice))
-        {
-            weapon.weaponSo.isUnlocked = true;
-            lockScreen.SetActive(false);
-        }
+        if (!_wallet.SpendCoins(_weapon.weaponSo.weaponPrice)) return;
+        _weapon.weaponSo.isUnlocked = true;
+        lockScreen.SetActive(false);
     }
 }
