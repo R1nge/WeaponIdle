@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Weapon : MonoBehaviour, IPointerClickHandler
+public class Weapon : MonoBehaviour
 {
     public WeaponSO weaponSo;
     public static bool boost;
@@ -13,7 +12,11 @@ public class Weapon : MonoBehaviour, IPointerClickHandler
 
     private void Awake() => _wallet = FindObjectOfType<Wallet>();
 
-    private void Start() => _startTime = weaponSo.startTime;
+    private void Start()
+    {
+        _startTime = weaponSo.startTime;
+        time = _startTime;
+    }
 
     private void Update()
     {
@@ -34,36 +37,30 @@ public class Weapon : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if(weaponSo.isAuto) return;
-        Shoot();
-    }
-    
-    private void Earn() => _wallet.EarnCoins(weaponSo.weaponIncome);
-
-    private void Shoot()
+    public void Shoot()
     {
         if (!weaponSo.isUnlocked) return;
         if(_startedTimer) return;
         _startedTimer = true;
-        StartCoroutine(Delay());
+        StartCoroutine(Delay_c());
     }
 
-    private IEnumerator Delay()
+    private IEnumerator Delay_c()
     {
         if (boost)
         {
             time /= 2;
-            yield return new WaitForSeconds(time);
         }
         else
         {
             time = _startTime;
-            yield return new WaitForSeconds(time);
         }
+        
+        yield return new  WaitForSeconds(time);
         
         _startedTimer = false;
         Earn();        
     }
+
+    private void Earn() => _wallet.EarnCoins(weaponSo.weaponIncome);
 }

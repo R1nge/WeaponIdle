@@ -21,7 +21,7 @@ public class WeaponUIHandler : MonoBehaviour
         _weapon = GetComponent<Weapon>();
     }
 
-    private void Start()
+    private void Start()    
     {
         Init();
         UpdateWeaponUI();
@@ -41,7 +41,8 @@ public class WeaponUIHandler : MonoBehaviour
             lockScreenIcon.sprite = _weapon.weaponSo.sprite;
         }
 
-        progressBar.minValue = -_weapon.time;
+        progressBar.minValue = -_weapon.weaponSo.startTime;
+        progressBar.value = progressBar.minValue;
     }
 
     private void UpdateProgressBar() => progressBar.value = -_weapon.time;

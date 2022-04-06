@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: USP-S
   m_EditorClassIdentifier: 
   weaponName: USP-S
-  weaponLevel: 9
+  weaponLevel: 1
   weaponPrice: 450
   weaponBaseIncome: 15
   weaponIncome: 135
