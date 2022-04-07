@@ -18,5 +18,10 @@ public class WeaponSO : ScriptableObject
         weaponLevel += 1;
         weaponIncome = weaponBaseIncome * weaponLevel;
         weaponPrice = (weaponIncome * 2 + weaponLevel * 10) * 1.25f;
+
+        if (weaponLevel >= 100)
+        {
+            isAuto = true;
+        }
     }
 }
