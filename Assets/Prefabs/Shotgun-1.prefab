@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 4494701218388794555}
   - component: {fileID: 4494701218388794554}
   - component: {fileID: 4494701218388794557}
+  - component: {fileID: 234582766647284033}
   m_Layer: 5
   m_Name: Shotgun-1
   m_TagString: Untagged
@@ -646,6 +647,32 @@ MonoBehaviour:
   lockScreen: {fileID: 8341336356566209346}
   lockScreenIcon: {fileID: 5028575192008371213}
   buy: {fileID: 1396564096136362267}
+--- !u!61 &234582766647284033
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4494701218388794559}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 279, y: -5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 830, y: 245}
+  m_EdgeRadius: 0
 --- !u!1 &4494701218471906148
 GameObject:
   m_ObjectHideFlags: 0

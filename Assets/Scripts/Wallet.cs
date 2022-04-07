@@ -30,7 +30,7 @@ public class Wallet : MonoBehaviour
 
     public bool SpendCoins(float amount)
     {
-        if (!(coins - amount > 0)) return false;
+        if (!(coins - amount >= 0)) return false;
         coins -= amount;
         OnCoinsAmountChanged?.Invoke(coins);
         return true;
@@ -44,7 +44,7 @@ public class Wallet : MonoBehaviour
     
     public bool SpendGems(float amount)
     {
-        if (!(coins - amount > 0)) return false;
+        if (!(coins - amount >= 0)) return false;
         coins -= amount;
         OnGemsAmountChanged?.Invoke(gems);
         return true;

@@ -1362,6 +1362,7 @@ GameObject:
   - component: {fileID: 8346203604951432710}
   - component: {fileID: 8346203604951432711}
   - component: {fileID: 8346203604951432704}
+  - component: {fileID: 6591859081173147675}
   m_Layer: 5
   m_Name: Rifle-2
   m_TagString: Untagged
@@ -1467,6 +1468,32 @@ MonoBehaviour:
   lockScreen: {fileID: 4499562478514778623}
   lockScreenIcon: {fileID: 611046415675854512}
   buy: {fileID: 6832627633309031334}
+--- !u!61 &6591859081173147675
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8346203604951432706}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 279, y: -5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 830, y: 245}
+  m_EdgeRadius: 0
 --- !u!1 &8346203605032696284
 GameObject:
   m_ObjectHideFlags: 0

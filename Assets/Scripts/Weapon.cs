@@ -26,14 +26,22 @@ public class Weapon : MonoBehaviour
         }
         
         if(!_startedTimer) return;
-        
+
         if (time <= 0)
         {
             time = _startTime;
+            _startedTimer = false;
         }
         else
         {
-            time -= Time.deltaTime;
+            if (boost)
+            {
+                time -= Time.deltaTime * 2;
+            }
+            else
+            {
+                time -= Time.deltaTime;
+            }
         }
     }
 
@@ -47,18 +55,7 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator Delay_c()
     {
-        if (boost)
-        {
-            time /= 2;
-        }
-        else
-        {
-            time = _startTime;
-        }
-        
         yield return new  WaitForSeconds(time);
-        
-        _startedTimer = false;
         Earn();        
     }
 
