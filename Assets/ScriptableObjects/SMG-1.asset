@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: SMG-1
   weaponLevel: 1
-  weaponPrice: 262.5
-  weaponBaseIncome: 90
-  weaponIncome: 90
+  weaponPrice: 1164
+  weaponBaseIncome: 480
+  weaponIncome: 480
   startTime: 3
   sprite: {fileID: 21300000, guid: 9f8bab3885022fd4e889870c38c649fd, type: 3}
   isUnlocked: 0

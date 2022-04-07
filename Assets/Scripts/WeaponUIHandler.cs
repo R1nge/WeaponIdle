@@ -40,7 +40,6 @@ public class WeaponUIHandler : MonoBehaviour
             buy.text = _weapon.weaponSo.weaponPrice.ToString(CultureInfo.InvariantCulture);
             lockScreenIcon.sprite = _weapon.weaponSo.sprite;
         }
-
         progressBar.minValue = -_weapon.weaponSo.startTime;
         progressBar.value = progressBar.minValue;
     }

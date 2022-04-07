@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Rifle-1
   weaponLevel: 1
-  weaponPrice: 1212.5
-  weaponBaseIncome: 480
-  weaponIncome: 480
+  weaponPrice: 4620
+  weaponBaseIncome: 1920
+  weaponIncome: 1920
   startTime: 7
   sprite: {fileID: 21300000, guid: 41bc4681360022f4fb6e487c03c270d7, type: 3}
   isUnlocked: 0

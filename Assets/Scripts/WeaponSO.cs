@@ -13,6 +13,12 @@ public class WeaponSO : ScriptableObject
     public bool isUnlocked;
     public bool isAuto;
 
+    public void Init()
+    {
+        weaponIncome = weaponBaseIncome * weaponLevel;
+        weaponPrice = (weaponIncome * 2 + weaponLevel * 10) * 1.2f;
+    }
+    
     public void UpgradeWeapon()
     {
         weaponLevel += 1;

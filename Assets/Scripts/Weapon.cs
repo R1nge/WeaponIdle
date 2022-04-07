@@ -10,7 +10,11 @@ public class Weapon : MonoBehaviour
     private Wallet _wallet;
     private bool _startedTimer;
 
-    private void Awake() => _wallet = FindObjectOfType<Wallet>();
+    private void Awake()
+    {
+        _wallet = FindObjectOfType<Wallet>();
+        weaponSo.Init();
+    }
 
     private void Start()
     {
