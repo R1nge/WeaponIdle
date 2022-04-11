@@ -51,7 +51,7 @@ public class Weapon : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public void Shoot()
+    private void Shoot()
     {
         if (!weaponSo.isUnlocked) return;
         if(_startedTimer) return;
@@ -67,9 +67,5 @@ public class Weapon : MonoBehaviour, IPointerDownHandler
 
     private void Earn() => _wallet.EarnCoins(weaponSo.weaponBaseIncome);
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        Shoot();
-        print("click");
-    }
+    public void OnPointerDown(PointerEventData eventData) => Shoot();
 }
