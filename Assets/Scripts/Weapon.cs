@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Weapon : MonoBehaviour
+[RequireComponent(typeof(WeaponUIHandler))]
+public class Weapon : MonoBehaviour, IPointerDownHandler
 {
     public WeaponSO weaponSo;
     public static bool boost;
@@ -18,7 +20,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        _startTime = weaponSo.startTime;
+        _startTime = weaponSo.delay;
         time = _startTime;
     }
 
@@ -63,5 +65,11 @@ public class Weapon : MonoBehaviour
         Earn();        
     }
 
-    private void Earn() => _wallet.EarnCoins(weaponSo.weaponIncome);
+    private void Earn() => _wallet.EarnCoins(weaponSo.weaponBaseIncome);
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Shoot();
+        print("click");
+    }
 }

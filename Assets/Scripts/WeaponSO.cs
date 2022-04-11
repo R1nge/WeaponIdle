@@ -7,23 +7,22 @@ public class WeaponSO : ScriptableObject
     public int weaponLevel;
     public float weaponPrice;
     public float weaponBaseIncome;
-    public float weaponIncome;
-    public float startTime;
+    public float delay;
     public Sprite sprite;
     public bool isUnlocked;
     public bool isAuto;
 
     public void Init()
     {
-        weaponIncome = weaponBaseIncome * weaponLevel;
-        weaponPrice = (weaponIncome * 2 + weaponLevel * 10) * 1.2f;
+        weaponBaseIncome *= weaponLevel;
+        weaponPrice = (weaponBaseIncome * 2 + weaponLevel * 10) * 1.2f;
     }
     
     public void UpgradeWeapon()
     {
         weaponLevel += 1;
-        weaponIncome = weaponBaseIncome * weaponLevel;
-        weaponPrice = (weaponIncome * 2 + weaponLevel * 10) * 1.25f;
+        weaponBaseIncome *= weaponLevel;
+        weaponPrice = (weaponBaseIncome * 2 + weaponLevel * 10) * 1.25f;
 
         if (weaponLevel >= 100)
         {

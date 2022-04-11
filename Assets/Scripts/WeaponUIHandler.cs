@@ -1,25 +1,21 @@
-using System.Globalization;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponUIHandler : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI weaponName, weaponLevel, weaponIncome;
-    [SerializeField] private Image weaponImage;
-    [SerializeField] private Slider progressBar;
-    [SerializeField] private TextMeshProUGUI upgradePrice;
-    [SerializeField] private GameObject lockScreen;
-    [SerializeField] private Image lockScreenIcon;
-    [SerializeField] private TextMeshProUGUI buy;
+    private TextMeshProUGUI _weaponName, _weaponLevel, _weaponIncome;
+    private Image _weaponImage;
+    private Slider _progressBar;
+    private TextMeshProUGUI _upgradePrice;
+    private GameObject _lockScreen;
+    private Image _lockScreenIcon;
+    private TextMeshProUGUI _buyPrice;
     private Wallet _wallet;
     private Weapon _weapon;
     
-    private void Awake()
-    {
-        _wallet = FindObjectOfType<Wallet>();
-        _weapon = GetComponent<Weapon>();
-    }
+    private void Awake() => FindReferences();
 
     private void Start()    
     {
@@ -29,22 +25,39 @@ public class WeaponUIHandler : MonoBehaviour
 
     private void Update() => UpdateProgressBar();
 
+    private void FindReferences()
+    {
+        _wallet = FindObjectOfType<Wallet>();
+        _weapon = GetComponent<Weapon>();
+        
+        //Cringe
+        _weaponName = transform.Find("Name").GetComponent<TextMeshProUGUI>();
+        _weaponLevel = transform.Find("Level").GetComponent<TextMeshProUGUI>();
+        _weaponIncome = transform.Find("Income").GetComponent<TextMeshProUGUI>();
+        _weaponImage = transform.Find("Image").GetComponent<Image>();
+        _progressBar = transform.Find("Slider").GetComponent<Slider>();
+        _upgradePrice = transform.Find("UpgradeButton").GetChild(0).GetComponent<TextMeshProUGUI>();
+        _lockScreen = transform.Find("LockScreen").gameObject;
+        _lockScreenIcon = _lockScreen.transform.GetChild(0).GetChild(1).GetComponent<Image>();
+        _buyPrice = _lockScreen.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+    }
+    
     private void Init()
     {
         if (_weapon.weaponSo.isUnlocked)
         {
-            lockScreen.SetActive(false);
+            _lockScreen.SetActive(false);
         }
         else
         {
-            buy.text = _weapon.weaponSo.weaponPrice.ToString(CultureInfo.InvariantCulture);
-            lockScreenIcon.sprite = _weapon.weaponSo.sprite;
+            _buyPrice.text = Helper.FormatNumber(_weapon.weaponSo.weaponPrice);
+            _lockScreenIcon.sprite = _weapon.weaponSo.sprite;
         }
-        progressBar.minValue = -_weapon.weaponSo.startTime;
-        progressBar.value = progressBar.minValue;
+        _progressBar.minValue = -_weapon.weaponSo.delay;
+        _progressBar.value = _progressBar.minValue;
     }
 
-    private void UpdateProgressBar() => progressBar.value = -_weapon.time;
+    private void UpdateProgressBar() => _progressBar.value = -_weapon.time;
 
     public void UpgradeWeapon()
     {
@@ -55,17 +68,17 @@ public class WeaponUIHandler : MonoBehaviour
 
     private void UpdateWeaponUI()
     {
-        weaponName.text = _weapon.weaponSo.weaponName;
-        weaponLevel.text = "Level: " + _weapon.weaponSo.weaponLevel;
-        weaponIncome.text = "Income:" + _weapon.weaponSo.weaponIncome;
-        weaponImage.sprite = _weapon.weaponSo.sprite;
-        upgradePrice.text = _weapon.weaponSo.weaponPrice.ToString(CultureInfo.CurrentCulture);
+        _weaponName.text = _weapon.weaponSo.weaponName;
+        _weaponLevel.text = "Level: " + _weapon.weaponSo.weaponLevel;
+        _weaponIncome.text = "Income:" + Helper.FormatNumber(_weapon.weaponSo.weaponBaseIncome);
+        _weaponImage.sprite = _weapon.weaponSo.sprite;
+        _upgradePrice.text = Helper.FormatNumber(_weapon.weaponSo.weaponPrice);
     }
 
     public void UnlockWeapon()
     {
         if (!_wallet.SpendCoins(_weapon.weaponSo.weaponPrice)) return;
         _weapon.weaponSo.isUnlocked = true;
-        lockScreen.SetActive(false);
+        _lockScreen.SetActive(false);
     }
 }

@@ -5,21 +5,42 @@ using UnityEngine;
 public class UIHandler : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI coins, gems;
+    [SerializeField] private GameObject mainScreen, employeeScreen, settingsScreen;
     private Wallet _wallet;
 
     private void Awake()
-    {
-        Weapon.boost = false;
+    {    
         _wallet = FindObjectOfType<Wallet>();
         _wallet.OnCoinsAmountChanged += UpdateCoinsText;
         _wallet.OnGemsAmountChanged += UpdateGemsText;
     }
+
+    public void ShowMainScreen()
+    {
+        mainScreen.SetActive(true);
+        employeeScreen.SetActive(false);
+        settingsScreen.SetActive(false);
+    }
+
+    public void ShowEmployeeScreen()
+    {
+        mainScreen.SetActive(false);
+        employeeScreen.SetActive(true);
+        settingsScreen.SetActive(false);
+    }
+
+    public void ShowSettingsMenu()
+    {
+        mainScreen.SetActive(false);
+        employeeScreen.SetActive(false);
+        settingsScreen.SetActive(true);
+    }
     
-    public void ApplyBoost() => Weapon.boost = true;
+    public void ApplyBoost() => Weapon.boost = true; //TODO: Show Ad
 
-    private void UpdateCoinsText(float amount) => coins.text = "Coins: " + amount.ToString(CultureInfo.InvariantCulture);
+    private void UpdateCoinsText(float amount) => coins.text = "Coins: " + Helper.FormatNumber(amount).ToString(CultureInfo.InvariantCulture);
 
-    private void UpdateGemsText(float amount) => gems.text = "Gems: " + amount.ToString(CultureInfo.InvariantCulture);
+    private void UpdateGemsText(float amount) => gems.text = "Gems: " + Helper.FormatNumber(amount);
 
     private void OnDestroy()
     {
