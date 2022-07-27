@@ -6,6 +6,7 @@ public class SoundHandler : MonoBehaviour
     [SerializeField] private Settings settings;
     [SerializeField] private AudioSource sound, music;
     [SerializeField] private Image soundButton, musicButton;
+
     private void Start()
     {
         sound.enabled = settings.sound;
@@ -25,7 +26,9 @@ public class SoundHandler : MonoBehaviour
             sound.enabled = true;
             settings.sound = true;
         }
+
         SetColor();
+        settings.Save();
     }
 
     public void ToggleMusic()
@@ -40,8 +43,9 @@ public class SoundHandler : MonoBehaviour
             music.enabled = true;
             settings.music = true;
         }
+
         SetColor();
-        //TODO: add button animation
+        settings.Save();
     }
 
     private void SetColor()

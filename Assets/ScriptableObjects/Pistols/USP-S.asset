@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: USP-S
   weaponLevel: 1
-  weaponPrice: 336
-  weaponBaseIncome: 135
+  weaponPrice: 252.00002
+  weaponBaseIncome: 100
   delay: 2
   sprite: {fileID: 21300000, guid: 8e2e681aa0fe903458951b4c53d1920c, type: 3}
   isUnlocked: 1
