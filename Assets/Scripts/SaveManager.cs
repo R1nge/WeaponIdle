@@ -1,5 +1,4 @@
-﻿using System.IO;
-using BayatGames.SaveGameFree;
+﻿using BayatGames.SaveGameFree;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -18,14 +17,9 @@ public class SaveManager : MonoBehaviour
         {
             Save();
         }
-
-        for (int i = 0; i < weapons.Length; i++)
-        {
-            weapons[i].data = _data[i];
-        }
     }
 
-    public void Save()
+    private void Save()
     {
         _data = new WeaponSO.Data[weapons.Length];
 
@@ -37,7 +31,7 @@ public class SaveManager : MonoBehaviour
         SaveGame.Save(_identifier, _data);
     }
 
-    public void Load()
+    private void Load()
     {
         _data = SaveGame.Load<WeaponSO.Data[]>(_identifier);
 
