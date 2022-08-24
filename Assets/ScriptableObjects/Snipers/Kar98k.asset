@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Kar98k
   weaponLevel: 1
-  weaponPrice: 15564.001
+  weaponPrice: 1308
   weaponBaseIncome: 540
-  weaponIncome: 6480
   delay: 5
   sprite: {fileID: 21300000, guid: c93c1ba89909e22489c595af4bfd97a2, type: 3}
   isUnlocked: 0

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a58c14c4236574c83bd7f0a80f38cf, type: 3}
   m_Name: USP-S
   m_EditorClassIdentifier: 
-  weaponName: USP-S
-  weaponLevel: 1
-  weaponPrice: 252.00002
-  weaponBaseIncome: 100
-  delay: 2
+  data:
+    weaponName: 123
+    weaponLevel: 123
+    weaponPrice: 123
+    weaponBaseIncome: 123
+    delay: 123
+    isUnlocked: 1
+    isAuto: 1
   sprite: {fileID: 21300000, guid: 8e2e681aa0fe903458951b4c53d1920c, type: 3}
-  isUnlocked: 1
-  isAuto: 0

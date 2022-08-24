@@ -13,10 +13,10 @@ public class WeaponUIHandler : MonoBehaviour
     private TextMeshProUGUI _buyPrice;
     private Wallet _wallet;
     private Weapon _weapon;
-    
+
     private void Awake() => FindReferences();
 
-    private void Start()    
+    private void Start()
     {
         Init();
         UpdateWeaponUI();
@@ -28,7 +28,7 @@ public class WeaponUIHandler : MonoBehaviour
     {
         _wallet = FindObjectOfType<Wallet>();
         _weapon = GetComponent<Weapon>();
-        
+
         //Cringe
         _weaponName = transform.Find("Name").GetComponent<TextMeshProUGUI>();
         _weaponLevel = transform.Find("Level").GetComponent<TextMeshProUGUI>();
@@ -40,44 +40,45 @@ public class WeaponUIHandler : MonoBehaviour
         _lockScreenIcon = _lockScreen.transform.GetChild(0).GetChild(1).GetComponent<Image>();
         _buyPrice = _lockScreen.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
     }
-    
+
     private void Init()
     {
-        if (_weapon.weaponSo.isUnlocked)
+        if (_weapon.weaponSo.data.isUnlocked)
         {
             _lockScreen.SetActive(false);
         }
         else
         {
-            _buyPrice.text = Helper.FormatNumber(_weapon.weaponSo.weaponPrice);
+            _buyPrice.text = Helper.FormatNumber(_weapon.weaponSo.data.weaponPrice);
             _lockScreenIcon.sprite = _weapon.weaponSo.sprite;
         }
-        _progressBar.minValue = -_weapon.weaponSo.delay;
+
+        _progressBar.minValue = -_weapon.weaponSo.data.delay;
         _progressBar.value = _progressBar.minValue;
     }
 
-    private void UpdateProgressBar() => _progressBar.value = -_weapon.time;
+    private void UpdateProgressBar() => _progressBar.value = -_weapon.WeaponTime;
 
     public void UpgradeWeapon()
     {
-        if (!_wallet.SpendCoins(_weapon.weaponSo.weaponPrice)) return;
+        if (!_wallet.SpendCoins(_weapon.weaponSo.data.weaponPrice)) return;
         _weapon.weaponSo.UpgradeWeapon();
         UpdateWeaponUI();
     }
 
     private void UpdateWeaponUI()
     {
-        _weaponName.text = _weapon.weaponSo.weaponName;
-        _weaponLevel.text = "Level: " + _weapon.weaponSo.weaponLevel;
-        _weaponIncome.text = "Income:" + Helper.FormatNumber(_weapon.weaponSo.weaponBaseIncome);
+        _weaponName.text = _weapon.weaponSo.data.weaponName;
+        _weaponLevel.text = "Level: " + _weapon.weaponSo.data.weaponLevel;
+        _weaponIncome.text = "Income:" + Helper.FormatNumber(_weapon.weaponSo.data.weaponBaseIncome);
         _weaponImage.sprite = _weapon.weaponSo.sprite;
-        _upgradePrice.text = Helper.FormatNumber(_weapon.weaponSo.weaponPrice);
+        _upgradePrice.text = Helper.FormatNumber(_weapon.weaponSo.data.weaponPrice);
     }
 
     public void UnlockWeapon()
     {
-        if (!_wallet.SpendCoins(_weapon.weaponSo.weaponPrice)) return;
-        _weapon.weaponSo.isUnlocked = true;
+        if (!_wallet.SpendCoins(_weapon.weaponSo.data.weaponPrice)) return;
+        _weapon.weaponSo.data.isUnlocked = true;
         _lockScreen.SetActive(false);
     }
 }

@@ -16,8 +16,7 @@ MonoBehaviour:
   weaponLevel: 1
   weaponPrice: 9228
   weaponBaseIncome: 3840
-  weaponIncome: 3840
-  startTime: 8
+  delay: 3
   sprite: {fileID: 21300000, guid: a059eb3cc5bcd014fab414b40ae64cb4, type: 3}
   isUnlocked: 0
   isAuto: 0

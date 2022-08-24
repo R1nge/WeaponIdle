@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,10 +9,11 @@ public class Weapon : MonoBehaviour, IPointerDownHandler
 {
     public WeaponSO weaponSo;
     public static bool boost;
-    [HideInInspector] public float time;
     private float _startTime;
     private Wallet _wallet;
     private bool _startedTimer;
+
+    public float WeaponTime { get; private set; }
 
     private void Awake()
     {
@@ -20,52 +23,52 @@ public class Weapon : MonoBehaviour, IPointerDownHandler
 
     private void Start()
     {
-        _startTime = weaponSo.delay;
-        time = _startTime;
+        _startTime = weaponSo.data.delay;
+        WeaponTime = _startTime;
     }
 
     private void Update()
     {
-        if (weaponSo.isAuto)
+        if (weaponSo.data.isAuto)
         {
             Shoot();
         }
-        
-        if(!_startedTimer) return;
 
-        if (time <= 0)
+        if (!_startedTimer) return;
+
+        if (WeaponTime <= 0)
         {
-            time = _startTime;
+            WeaponTime = _startTime;
             _startedTimer = false;
         }
         else
         {
             if (boost)
             {
-                time -= Time.deltaTime * 2;
+                WeaponTime -= Time.deltaTime * 2;
             }
             else
             {
-                time -= Time.deltaTime;
+                WeaponTime -= Time.deltaTime;
             }
         }
     }
 
     private void Shoot()
     {
-        if (!weaponSo.isUnlocked) return;
-        if(_startedTimer) return;
+        if (!weaponSo.data.isUnlocked) return;
+        if (_startedTimer) return;
         _startedTimer = true;
         StartCoroutine(Delay_c());
     }
 
     private IEnumerator Delay_c()
     {
-        yield return new  WaitForSeconds(time);
-        Earn();        
+        yield return new WaitForSeconds(WeaponTime);
+        Earn();
     }
 
-    private void Earn() => _wallet.EarnCoins(weaponSo.weaponBaseIncome);
+    private void Earn() => _wallet.EarnCoins(weaponSo.data.weaponBaseIncome);
 
     public void OnPointerDown(PointerEventData eventData) => Shoot();
 }

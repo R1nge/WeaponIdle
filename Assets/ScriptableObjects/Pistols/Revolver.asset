@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a58c14c4236574c83bd7f0a80f38cf, type: 3}
   m_Name: Revolver
   m_EditorClassIdentifier: 
-  weaponName: Revolver
-  weaponLevel: 1
-  weaponPrice: 660
-  weaponBaseIncome: 270
-  delay: 3
+  data:
+    weaponName: 321
+    weaponLevel: 321
+    weaponPrice: 321
+    weaponBaseIncome: 321
+    delay: 321
+    isUnlocked: 1
+    isAuto: 1
   sprite: {fileID: 21300000, guid: d9cdd7dd9f2cdc64a92897476e1630bf, type: 3}
-  isUnlocked: 0
-  isAuto: 0
