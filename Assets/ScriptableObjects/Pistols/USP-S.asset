@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: USP-S
   m_EditorClassIdentifier: 
   data:
-    weaponName: 123
-    weaponLevel: 123
-    weaponPrice: 123
-    weaponBaseIncome: 123
-    delay: 123
+    weaponName: 1
+    weaponLevel: 1
+    weaponPrice: 1
+    weaponBaseIncome: 1
+    delay: 1
     isUnlocked: 1
     isAuto: 1
   sprite: {fileID: 21300000, guid: 8e2e681aa0fe903458951b4c53d1920c, type: 3}

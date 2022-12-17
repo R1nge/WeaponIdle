@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Weapon : MonoBehaviour, IPointerDownHandler
 {
     public WeaponSO weaponSo;
-    public static bool boost;
+    public static bool Boost;
     private float _startTime;
     private Wallet _wallet;
     private bool _startedTimer;
@@ -43,7 +41,7 @@ public class Weapon : MonoBehaviour, IPointerDownHandler
         }
         else
         {
-            if (boost)
+            if (Boost)
             {
                 WeaponTime -= Time.deltaTime * 2;
             }
@@ -54,17 +52,17 @@ public class Weapon : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    private void Shoot()
+    private async void Shoot()
     {
         if (!weaponSo.data.isUnlocked) return;
         if (_startedTimer) return;
         _startedTimer = true;
-        StartCoroutine(Delay_c());
+        await Delay();
     }
 
-    private IEnumerator Delay_c()
+    private async Task Delay()
     {
-        yield return new WaitForSeconds(WeaponTime);
+        await Task.Delay((int)(WeaponTime * 1000));
         Earn();
     }
 
