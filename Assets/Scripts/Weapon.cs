@@ -1,60 +1,71 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(WeaponUIHandler))]
+[RequireComponent(typeof(WeaponUI))]
 public class Weapon : MonoBehaviour, IPointerDownHandler
 {
-    public WeaponSO weaponSo;
+    public Data data;
     public static bool Boost;
     private float _startTime;
-    private Wallet _wallet;
     private bool _startedTimer;
-
-    public float WeaponTime { get; private set; }
+    private float _weaponTime;
+    private Wallet _wallet;
+    private WeaponUI _weaponUI;
 
     private void Awake()
     {
         _wallet = FindObjectOfType<Wallet>();
-        weaponSo.Init();
+        _weaponUI = GetComponent<WeaponUI>();
+        data.Init();
+        data.OnWeaponUpgraded += OnWeaponUpgraded;
+    }
+
+    private void OnWeaponUpgraded(float delay)
+    {
+        _startTime = delay;
+        _weaponUI.UpdateProgressBar(delay);
     }
 
     private void Start()
     {
-        _startTime = weaponSo.data.delay;
-        WeaponTime = _startTime;
+        _startTime = data.delay;
+        _weaponTime = _startTime;
     }
 
     private void Update()
     {
-        if (weaponSo.data.isAuto)
+        if (data.isAuto)
         {
             Shoot();
         }
 
         if (!_startedTimer) return;
 
-        if (WeaponTime <= 0)
+        if (_weaponTime <= 0)
         {
-            WeaponTime = _startTime;
+            _weaponTime = _startTime;
             _startedTimer = false;
         }
         else
         {
             if (Boost)
             {
-                WeaponTime -= Time.deltaTime * 2;
+                _weaponTime -= Time.deltaTime * 2;
             }
             else
             {
-                WeaponTime -= Time.deltaTime;
+                _weaponTime -= Time.deltaTime;
             }
         }
+
+        _weaponUI.UpdateProgressBar(_weaponTime);
     }
 
     private async void Shoot()
     {
-        if (!weaponSo.data.isUnlocked) return;
+        if (!data.isUnlocked) return;
         if (_startedTimer) return;
         _startedTimer = true;
         await Delay();
@@ -62,11 +73,13 @@ public class Weapon : MonoBehaviour, IPointerDownHandler
 
     private async Task Delay()
     {
-        await Task.Delay((int)(WeaponTime * 1000));
+        await Task.Delay((int)(_weaponTime * 1000));
         Earn();
     }
 
-    private void Earn() => _wallet.EarnCoins(weaponSo.data.weaponBaseIncome);
+    private void Earn() => _wallet.EarnCoins(data.weaponBaseIncome);
 
     public void OnPointerDown(PointerEventData eventData) => Shoot();
+
+    private void OnDestroy() => data.OnWeaponUpgraded -= OnWeaponUpgraded;
 }

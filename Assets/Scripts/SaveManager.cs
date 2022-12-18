@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    [SerializeField] private WeaponSO[] weapons;
-    private WeaponSO.Data[] _data;
+    [SerializeField] private Weapon[] weapons;
+    private Data[] _data;
     private readonly string _identifier = "weapons";
-
+    
     private void Awake()
     {
         if (SaveGame.Exists(_identifier))
@@ -21,7 +21,7 @@ public class SaveManager : MonoBehaviour
 
     private void Save()
     {
-        _data = new WeaponSO.Data[weapons.Length];
+        _data = new Data[weapons.Length];
 
         for (int i = 0; i < weapons.Length; i++)
         {
@@ -33,7 +33,7 @@ public class SaveManager : MonoBehaviour
 
     private void Load()
     {
-        _data = SaveGame.Load<WeaponSO.Data[]>(_identifier);
+        _data = SaveGame.Load<Data[]>(_identifier);
 
         for (int i = 0; i < weapons.Length; i++)
         {

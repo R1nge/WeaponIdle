@@ -36,7 +36,7 @@ public class UIHandler : MonoBehaviour
         settingsScreen.SetActive(true);
     }
     
-    public void ApplyBoost() => Weapon.boost = true; //TODO: Show Ad
+    public void ApplyBoost() => Weapon.Boost = true; //TODO: Show Ad
 
     private void UpdateCoinsText(float amount) => coins.text = "Coins: " + Helper.FormatNumber(amount).ToString(CultureInfo.InvariantCulture);
 
