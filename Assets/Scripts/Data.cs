@@ -1,8 +1,10 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public class Data
 {
+    [SerializeField] private float startDelay;
     public string weaponName;
     public int weaponLevel;
     public float weaponPrice;
@@ -15,6 +17,7 @@ public class Data
     private const int LevelModifier = 10;
     private const float TotalModifier = 1.25f;
 
+    public event Action OnWeaponUnlocked;
     public event Action<float> OnWeaponUpgraded;
 
     public void Init()
@@ -28,12 +31,21 @@ public class Data
         weaponLevel += 1;
         weaponBaseIncome *= weaponLevel;
         weaponPrice = (weaponBaseIncome * IncomeModifier + weaponLevel * LevelModifier) * TotalModifier;
+        delay -= startDelay / 150;
 
-        if (weaponLevel >= 100)
+        if (weaponLevel == 100 && !isAuto)
         {
-            isAuto = true;
+            MakeAuto();
         }
 
         OnWeaponUpgraded?.Invoke(delay);
     }
+
+    public void UnlockWeapon()
+    {
+        isUnlocked = true;
+        OnWeaponUnlocked?.Invoke();
+    }
+
+    public void MakeAuto() => isAuto = true;
 }

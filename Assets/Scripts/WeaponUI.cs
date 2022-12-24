@@ -52,6 +52,7 @@ public class WeaponUI : MonoBehaviour
         weaponIncome.text = "Income:" + Helper.FormatNumber(_weapon.data.weaponBaseIncome);
         weaponImage.sprite = sprite;
         upgradePrice.text = Helper.FormatNumber(_weapon.data.weaponPrice);
+        progressBar.minValue = -_weapon.data.delay;
     }
 
     public void UpgradeWeapon()
@@ -64,7 +65,7 @@ public class WeaponUI : MonoBehaviour
     public void UnlockWeapon()
     {
         if (!_wallet.SpendCoins(_weapon.data.weaponPrice)) return;
-        _weapon.data.isUnlocked = true;
+        _weapon.data.UnlockWeapon();
         lockScreen.SetActive(false);
     }
 }
