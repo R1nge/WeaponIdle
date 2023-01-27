@@ -13,6 +13,7 @@ public class EmployeeUI : MonoBehaviour
     private void Awake()
     {
         _wallet = FindObjectOfType<Wallet>();
+        _wallet.OnCoinsAmountChanged += UpdateUI;
         weapon.data.OnWeaponUnlocked += UpdateUI;
         UpdateUI();
     }
@@ -30,5 +31,22 @@ public class EmployeeUI : MonoBehaviour
         text.text = weapon.data.isAuto ? "Unlocked" : $"{price}";
     }
 
-    private void OnDestroy() => weapon.data.OnWeaponUnlocked -= UpdateUI;
+    private void UpdateUI(float money)
+    {
+        if (!weapon.data.isUnlocked) return;
+        if (weapon.data.isAuto)
+        {
+            text.color = Color.black;
+        }
+        else
+        {
+            text.color = money < price ? Helper.RedColor() : Helper.GreenColor();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        _wallet.OnCoinsAmountChanged -= UpdateUI;
+        weapon.data.OnWeaponUnlocked -= UpdateUI;
+    }
 }

@@ -41,7 +41,7 @@ public class Wallet : MonoBehaviour
         coins += amount;
         OnGemsAmountChanged?.Invoke(gems);
     }
-    
+
     public bool SpendGems(float amount)
     {
         if (!(coins - amount >= 0)) return false;
@@ -49,11 +49,11 @@ public class Wallet : MonoBehaviour
         OnGemsAmountChanged?.Invoke(gems);
         return true;
     }
-    
+
     private void Save()
     {
         PlayerPrefs.SetFloat(Coins, coins);
-        PlayerPrefs.SetFloat(Gems,gems);
+        PlayerPrefs.SetFloat(Gems, gems);
         PlayerPrefs.Save();
     }
 

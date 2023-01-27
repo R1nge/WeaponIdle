@@ -19,6 +19,12 @@ public class WeaponUI : MonoBehaviour
     {
         _wallet = FindObjectOfType<Wallet>();
         _weapon = GetComponent<Weapon>();
+        _wallet.OnCoinsAmountChanged += UpdateWeaponUI;
+    }
+
+    private void UpdateWeaponUI(float money)
+    {
+        upgradePrice.color = money < _weapon.data.weaponPrice ? Helper.RedColor() : Helper.GreenColor();
     }
 
     private void Start()
