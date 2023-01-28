@@ -23,7 +23,14 @@ public class Data
     public void Init()
     {
         weaponBaseIncome *= weaponLevel;
-        weaponPrice = (weaponBaseIncome * IncomeModifier + weaponLevel * LevelModifier) * TotalModifier;
+        if (weaponLevel == 1)
+        {
+            weaponPrice = (weaponBaseIncome * IncomeModifier + weaponLevel * LevelModifier) * TotalModifier * 25;
+        }
+        else
+        {
+            weaponPrice = (weaponBaseIncome * IncomeModifier + weaponLevel * LevelModifier) * TotalModifier;
+        }
     }
 
     public void UpgradeWeapon()
@@ -32,11 +39,6 @@ public class Data
         weaponBaseIncome *= weaponLevel;
         weaponPrice = (weaponBaseIncome * IncomeModifier + weaponLevel * LevelModifier) * TotalModifier;
         delay -= startDelay / 150;
-
-        if (weaponLevel == 100 && !isAuto)
-        {
-            MakeAuto();
-        }
 
         OnWeaponUpgraded?.Invoke(delay);
     }

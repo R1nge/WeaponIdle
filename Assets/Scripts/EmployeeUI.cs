@@ -4,10 +4,13 @@ using UnityEngine.UI;
 
 public class EmployeeUI : MonoBehaviour
 {
+    [SerializeField] private Sprite weaponSprite;
+    [SerializeField] private Image weaponImage;
     [SerializeField] private int price;
     [SerializeField] private Weapon weapon;
     [SerializeField] private Button button;
-    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI weaponNameText;
+    [SerializeField] private TextMeshProUGUI priceText;
     private Wallet _wallet;
 
     private void Awake()
@@ -15,7 +18,14 @@ public class EmployeeUI : MonoBehaviour
         _wallet = FindObjectOfType<Wallet>();
         _wallet.OnCoinsAmountChanged += UpdateUI;
         weapon.data.OnWeaponUnlocked += UpdateUI;
+        Init();
         UpdateUI();
+    }
+
+    private void Init()
+    {
+        weaponImage.sprite = weaponSprite;
+        weaponNameText.text = weapon.data.weaponName;
     }
 
     public void MakeAuto()
@@ -28,7 +38,7 @@ public class EmployeeUI : MonoBehaviour
     private void UpdateUI()
     {
         button.interactable = !weapon.data.isAuto && weapon.data.isUnlocked;
-        text.text = weapon.data.isAuto ? "Unlocked" : $"{price}";
+        priceText.text = weapon.data.isAuto ? "Unlocked" : $"{price}";
     }
 
     private void UpdateUI(float money)
@@ -36,11 +46,11 @@ public class EmployeeUI : MonoBehaviour
         if (!weapon.data.isUnlocked) return;
         if (weapon.data.isAuto)
         {
-            text.color = Color.black;
+            priceText.color = Color.black;
         }
         else
         {
-            text.color = money < price ? Helper.RedColor() : Helper.GreenColor();
+            priceText.color = money < price ? Helper.RedColor() : Helper.GreenColor();
         }
     }
 

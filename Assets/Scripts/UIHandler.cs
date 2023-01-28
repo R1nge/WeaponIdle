@@ -9,10 +9,18 @@ public class UIHandler : MonoBehaviour
     private Wallet _wallet;
 
     private void Awake()
-    {    
+    {
+        ShowMainScreen();
+        ShowEmployeeScreen();
+        ShowSettingsMenu();
         _wallet = FindObjectOfType<Wallet>();
         _wallet.OnCoinsAmountChanged += UpdateCoinsText;
         _wallet.OnGemsAmountChanged += UpdateGemsText;
+    }
+
+    private void Start()
+    {
+        ShowMainScreen();
     }
 
     public void ShowMainScreen()
@@ -35,10 +43,11 @@ public class UIHandler : MonoBehaviour
         employeeScreen.SetActive(false);
         settingsScreen.SetActive(true);
     }
-    
+
     public void ApplyBoost() => Weapon.Boost = true; //TODO: Show Ad
 
-    private void UpdateCoinsText(float amount) => coins.text = "Coins: " + Helper.FormatNumber(amount).ToString(CultureInfo.InvariantCulture);
+    private void UpdateCoinsText(float amount) =>
+        coins.text = "Coins: " + Helper.FormatNumber(amount).ToString(CultureInfo.InvariantCulture);
 
     private void UpdateGemsText(float amount) => gems.text = "Gems: " + Helper.FormatNumber(amount);
 
